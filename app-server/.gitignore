@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.py[cod]
+
+venv/
+
+# Flask
+instance/
+.env
