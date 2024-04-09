@@ -1,2 +1,1 @@
-# CharView
-TEST CHART
+# Test project
