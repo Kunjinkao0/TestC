@@ -20,3 +20,8 @@ class NewsScraper:
     
     def parse_content(self, content):
         pass
+
+if __name__ == '__main__':
+    scraper = NewsScraper()
+    result = scraper.scrape_website('2020-01-01', 'https://www.google.com')
+    print(result)
