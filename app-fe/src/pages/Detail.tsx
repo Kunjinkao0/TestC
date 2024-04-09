@@ -8,7 +8,6 @@ function App() {
     fetch('/api/news-fetch?dateRange=1&website=1')
       .then(response => response.json())
       .then(data => {
-        console.log(data.toString())
         setResult(data)
       })
       .catch(error => console.error('Error fetching news:', error));
