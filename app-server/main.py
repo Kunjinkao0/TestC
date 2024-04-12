@@ -1,5 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify, render_template
 from scrapers.news_scraper import *
+from yhfin import *
+import json
 
 app = Flask(__name__)
 app.template_folder = 'public'
@@ -15,6 +17,7 @@ def res_formatter(func):
             result = func(*args, **kwargs)
             return format_response(result)
         except Exception as e:
+            print(e)
             return format_response(None, str(e), code=0), 500
     return wrapper
 
@@ -22,7 +25,7 @@ def res_formatter(func):
 def index():
     return render_template("index.html")
 
-@api_pre.route('/news-fetch', methods=['GET'])
+@api_pre.route('/news-fetch', methods=['GET'], endpoint="news-fetch")
 @res_formatter
 def scrape_data():
     scraper_params = request.args.to_dict()
@@ -30,7 +33,21 @@ def scrape_data():
     result = scraper.scrape_website(scraper_params['dateRange'], scraper_params['website'])
     return result
 
-app.register_blueprint(api_pre)
+@api_pre.route('/ticker-detail', methods=['GET'], endpoint="tickers")
+@res_formatter
+def get_stock_info():
+    symbol = request.args.get('symbol')
+    result = get_ticker_details(symbol)
+    return result
 
+@api_pre.route('/price-info', methods=['GET'], endpoint="price-info")
+@res_formatter
+def get_stock_info():
+    symbol = request.args.get('symbol')
+    with open('./dataset/aapl-c.json', 'r') as f:
+        data = json.load(f)
+        return data
+
+app.register_blueprint(api_pre)
 if __name__ == '__main__':
     app.run()

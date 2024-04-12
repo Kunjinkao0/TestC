@@ -7,7 +7,7 @@ function SearchPage() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate({ pathname: '/detail', search: `?wd=searchValue` });
+    navigate({ pathname: '/detail', search: `?symbol=${searchValue}` });
   };
 
   return (
