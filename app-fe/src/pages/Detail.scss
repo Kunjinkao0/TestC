@@ -1,5 +1,25 @@
-.TopDetails {
-    height: 200px;
-    background-color: aqua;
+#TopSection {
+    background-color: #3255b5;
     padding: 20px;
+    color: white;
+
+    #SymbolHead {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #TopDetails {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #Indicators {
+        width: 600px;
+
+        .IndicatorItem {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 }
