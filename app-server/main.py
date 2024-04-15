@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify, render_template
 from scrapers.news_scraper import *
+from scrapers.stock_data import *
 from yhfin import *
-import json
 
 app = Flask(__name__)
 app.template_folder = 'public'
@@ -44,9 +44,13 @@ def get_stock_info():
 @res_formatter
 def get_stock_info():
     symbol = request.args.get('symbol')
-    with open('./dataset/aapl-c.json', 'r') as f:
-        data = json.load(f)
-        return data
+    sd = StockData()
+    historical_data = sd.get_historical_prices(symbol, period="6mo", save_to_csv=False)
+    price_data = historical_data[['Close']]
+    price_data.reset_index(inplace=True)
+    price_data['Close'] = price_data['Close'].round(2)
+    return price_data.to_json(orient='values')
+
 
 app.register_blueprint(api_pre)
 if __name__ == '__main__':

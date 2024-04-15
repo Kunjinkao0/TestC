@@ -1,21 +1,21 @@
-.app {
+#App {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.center-search {
+#CenterSearch {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    #search-input {
+    #SearchInput {
         width: 600px;
         font-size: 20px;
     }
 
-    #search-button {
+    #SearchButton {
         width: 100px;
         height: 61px;
         font-size: 20px;

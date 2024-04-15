@@ -1,6 +1,6 @@
 #TopSection {
     background-color: #3255b5;
-    padding: 20px;
+    padding: 16px 160px;
     color: white;
 
     #SymbolHead {
@@ -20,6 +20,11 @@
         .IndicatorItem {
             display: flex;
             justify-content: space-between;
+            font-size: 0.9rem;
         }
     }
+}
+
+#ChartSection {
+    padding: 16px 160px;
 }

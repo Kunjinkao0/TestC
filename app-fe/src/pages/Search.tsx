@@ -8,23 +8,23 @@ function SearchPage() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
+    if (!searchValue) return;
     navigate({ pathname: '/detail', search: `?symbol=${searchValue}` });
   };
 
   return (
-    <div className="app">
-      <div className='center-search'>
-        <TextField id="search-input" label="Input symbol here" variant="outlined"
+    <div id="App">
+      <div id='CenterSearch'>
+        <TextField id="SearchInput" label="Input symbol here" variant="outlined"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
               handleSearch();
             }
-          }}
-          placeholder="Input here..." />
+          }} />
 
-        <Button id='search-button' variant="contained" onClick={handleSearch}>Search</Button>
+        <Button id='SearchButton' variant="contained" onClick={handleSearch}>Search</Button>
       </div>
     </div>
   );
