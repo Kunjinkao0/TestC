@@ -48,7 +48,7 @@ def get_stock_info():
     historical_data = sd.get_historical_prices(symbol, period="6mo", save_to_csv=False)
     price_data = historical_data[['Close']]
     price_data.reset_index(inplace=True)
-    price_data['Close'] = price_data['Close'].round(2)
+    price_data.loc[:, 'Close'] = price_data['Close'].round(2)
     return price_data.to_json(orient='values')
 
 
