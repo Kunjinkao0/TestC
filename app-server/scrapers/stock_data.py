@@ -31,6 +31,6 @@ if __name__ == "__main__":
     stock_data = StockData()
     symbol = "AAPL"  # Stock symbol
     period = "1mo"   # Time period
-    historical_data = stock_data.get_historical_prices(symbol, period, False)
+    historical_data = stock_data.get_historical_prices(symbol, period, True)
     print(historical_data)
 
