@@ -1,7 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify, render_template
 from scrapers.news_scraper import *
 from scrapers.stock_data import *
-from yhfin import *
 
 app = Flask(__name__)
 app.template_folder = 'public'
