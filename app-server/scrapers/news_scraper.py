@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import finnhub
 import json
 import news_analysis
+import time
 
 finnhub_client = finnhub.Client(api_key='co21o61r01qvggedq3dgco21o61r01qvggedq3e0')
 
@@ -26,7 +27,7 @@ class NewsData:
             analysor = news_analysis.Analysor()
             refined = analysor.analysis_news(refined)
 
-        file_name = f"{symbol}-{start_date}-{end_date}.csv"
+        file_name = f"{symbol}-NEWS-60DAYS-{start_date}-{end_date}.csv"
         df = pd.DataFrame(refined)
         df.to_csv(file_name, index=False)
 
@@ -41,15 +42,24 @@ class NewsData:
             response = finnhub_client.company_news(symbol, 
                                                    _from=start_date,
                                                    to=last_date)
-            full_data.extend(response)
-            last_item_date = datetime.fromtimestamp(response[-1]['datetime'])
-            last_date = (last_item_date - timedelta(days=1)).strftime('%Y-%m-%d')
+            
+            if len(response) > 0:
+                full_data.extend(response)
+                last_item_date = datetime.fromtimestamp(response[-1]['datetime'])
+                last_date = (last_item_date - timedelta(days=1)).strftime('%Y-%m-%d')
+                
+                time.sleep(1) # avoid rate limit
+            else:
+                print('No more data, stopped.')
+                # no more data
+                break
 
         return full_data
     
 if __name__ == "__main__":
+    end_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+    start_date = (datetime.now() - timedelta(days=59)).strftime('%Y-%m-%d')
+    symbol = "TSLA"
+
     news_data = NewsData()
-    symbol = "NVDA"
-    start_date = "2024-01-01"
-    end_date = "2024-05-01"
-    default_news = news_data.get_company_news(symbol, start_date, end_date, False)
+    default_news = news_data.get_company_news(symbol, start_date, end_date, analysis=False)
