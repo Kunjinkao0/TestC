@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timedelta
 import finnhub
 import json
-import news_analysis
+# import news_analysis
 import time
 
 finnhub_client = finnhub.Client(api_key='co21o61r01qvggedq3dgco21o61r01qvggedq3e0')
@@ -24,8 +24,8 @@ class NewsData:
             } for item in company_news]
         if analysis: 
             print('Data prepared, pending to analysis.')
-            analysor = news_analysis.Analysor()
-            refined = analysor.analysis_news(refined)
+            # analysor = news_analysis.Analysor()
+            # refined = analysor.analysis_news(refined)
 
         file_name = f"{symbol}-NEWS-60DAYS-{start_date}-{end_date}.csv"
         df = pd.DataFrame(refined)

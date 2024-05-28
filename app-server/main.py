@@ -28,7 +28,7 @@ def index():
 @res_formatter
 def scrape_data():
     scraper_params = request.args.to_dict()
-    scraper = NewsScraper()
+    scraper = NewsData()
     result = scraper.scrape_website(scraper_params['dateRange'], scraper_params['website'])
     return result
 
@@ -36,7 +36,7 @@ def scrape_data():
 @res_formatter
 def get_stock_info():
     symbol = request.args.get('symbol')
-    result = get_ticker_details(symbol)
+    result = get_stock_info(symbol)
     return result
 
 @api_pre.route('/price-info', methods=['GET'], endpoint="price-info")

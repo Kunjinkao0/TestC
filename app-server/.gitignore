@@ -10,3 +10,5 @@ venv/
 # Flask
 instance/
 .env
+
+logs/
